@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - Display sizes of various types in the system 
+ * main	- Display sizes of various types in the system 
  * Return: 0
  */
 int main(void)
