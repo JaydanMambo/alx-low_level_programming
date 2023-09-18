@@ -11,10 +11,13 @@ char getRandomAsciiChar() {
 }
 
 int main() {
+    
+    char password[50];  /* Adjust the array size as needed */
+    int currentChecksum = 0;
+    size_t passwordLength;
+
     srand(time(NULL));  /* Seed the random number generator with the current time */
 
-    int currentChecksum = 0;
-    char password[50];  /* Adjust the array size as needed */
 
     while (currentChecksum != TARGET_CHECKSUM) {
         /* Generate a random character and add its ASCII value to the checksum */
@@ -30,7 +33,7 @@ int main() {
         }
 
         /* Append the character to the password */
-        size_t passwordLength = strlen(password);
+         passwordLength = strlen(password);
         if (passwordLength < sizeof(password) - 1) {
             password[passwordLength] = character;
             password[passwordLength + 1] = '\0';  /* Null-terminate the password */
