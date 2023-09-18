@@ -34,7 +34,7 @@ void generateRandomPassword(char *password, int length, const char *charset, int
     password[length] = '\0'; /* Null-terminate the string */
 }
 
-int main() {
+int main(void) {
     const char *validCharset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const int validCharsetSize = 62; /* Length of the valid character set */
 
@@ -43,8 +43,7 @@ int main() {
     int passwordLength;
 
     passwordLength = 8; /* Change this to the desired password length */
-    
-    char password[9]; /* +1 for the null terminator */
+    char password[9];
 
     generateRandomPassword(password, passwordLength, validCharset, validCharsetSize);
 
