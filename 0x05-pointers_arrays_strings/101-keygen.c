@@ -41,7 +41,7 @@ int main() {
     srand(time(NULL)); /* Seed the random number generator with the current time */
 
     int passwordLength = 8; /* Change this to the desired password length */
-    char password[passwordLength + 1]; /* +1 for the null terminator */
+    char password[9]; /* +1 for the null terminator */
 
     generateRandomPassword(password, passwordLength, validCharset, validCharsetSize);
 
