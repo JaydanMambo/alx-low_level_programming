@@ -19,7 +19,7 @@ void puts_half(char *str)
 	else
 		start = (length - 1) / 2;
 	 /*Print the second half of the string */
-	for (i = start; str[i] != '\0'; i++)
+	for (i = length - start; i < length; i++)
 		_putchar(str[i]);
 	_putchar('\n');
 }
