@@ -4,10 +4,11 @@
 
 /**
  * randomCharacter - Generate a random character from a given character set
- * @charset: The character set to choose from
- * @charsetSize: The size of the character set
  *
- * Return: A random character from the character set
+ * @charset: The character set to choose from.
+ * @charsetSize: The size of the character set.
+ *
+ * Return: A random character from the character set.
  */
 char randomCharacter(const char *charset, int charsetSize) {
     int randomIndex = rand() % charsetSize;
@@ -16,30 +17,31 @@ char randomCharacter(const char *charset, int charsetSize) {
 
 /**
  * generateRandomPassword - Generate a random password of a given length
- * @password: The buffer to store the generated password
- * @length: The length of the password to generate
- * @charset: The character set to use for the password
- * @charsetSize: The size of the character set
+ *
+ * @password: The buffer to store the generated password.
+ * @length: The length of the password to generate.
+ * @charset: The character set to use for the password.
+ * @charsetSize: The size of the character set.
  *
  * This function generates a random password of the specified length using the
  * provided character set. It null-terminates the password string.
  */
 void generateRandomPassword(char *password, int length, const char *charset, int charsetSize) {
-    for (int i = 0; i < length; i++) {
+    int i;
+    for (i = 0; i < length; i++) {
         password[i] = randomCharacter(charset, charsetSize);
     }
-    password[length] = '\0'; // Null-terminate the string
+    password[length] = '\0'; /* Null-terminate the string */
 }
 
 int main() {
     const char *validCharset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const int validCharsetSize = 62; // Length of the valid character set
+    const int validCharsetSize = 62; /* Length of the valid character set */
 
-    srand(time(NULL)); // Seed the random number generator with the current time
+    srand(time(NULL)); /* Seed the random number generator with the current time */
 
-    int passwordLength = 8; // Change this to the desired password length
-
-    char password[passwordLength + 1]; // +1 for the null terminator
+    int passwordLength = 8; /* Change this to the desired password length */
+    char password[passwordLength + 1]; /* +1 for the null terminator */
 
     generateRandomPassword(password, passwordLength, validCharset, validCharsetSize);
 
