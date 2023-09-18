@@ -37,14 +37,11 @@ void generateRandomPassword(char *password, int length, const char *charset, int
 int main(void) {
     const char *validCharset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const int validCharsetSize = 62; /* Length of the valid character set */
-
-    srand(time(NULL)); /* Seed the random number generator with the current time */
-
     int passwordLength;
-
-    passwordLength = 8; /* Change this to the desired password length */
     char password[9];
 
+    srand(time(NULL)); /* Seed the random number generator with the current time */
+    passwordLength = 8; /* Change this to the desired password length */
     generateRandomPassword(password, passwordLength, validCharset, validCharsetSize);
 
     printf("Random Password: %s\n", password);
