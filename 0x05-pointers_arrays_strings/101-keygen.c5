@@ -1,23 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 
 #define TARGET_CHECKSUM 2772
 
-/* Function to generate a random ASCII character within a specified range */
+/* Function to generate a random ASCII character */
 char getRandomAsciiChar() {
-return rand() % 128;  /* Generates random ASCII characters (0-127) */
+    return rand() % 128;  /* Generates random ASCII characters (0-127) */
 }
 
-int main() {
-    
-    char password[50];  /* Adjust the array size as needed */
-    int currentChecksum = 0;
-    size_t passwordLength;
-
+int main(void) {
     srand(time(NULL));  /* Seed the random number generator with the current time */
 
+    printf("Generated Password for 101-crackme:\n");
+
+    int currentChecksum = 0;
+    char password[50];  /* Adjust the array size as needed */
 
     while (currentChecksum != TARGET_CHECKSUM) {
         /* Generate a random character and add its ASCII value to the checksum */
@@ -33,7 +31,7 @@ int main() {
         }
 
         /* Append the character to the password */
-         passwordLength = strlen(password);
+        size_t passwordLength = strlen(password);
         if (passwordLength < sizeof(password) - 1) {
             password[passwordLength] = character;
             password[passwordLength + 1] = '\0';  /* Null-terminate the password */

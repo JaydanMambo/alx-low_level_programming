@@ -7,7 +7,7 @@
 
 /* Function to generate a random ASCII character within a specified range */
 char getRandomAsciiChar() {
-return rand() % 128;  /* Generates random ASCII characters (0-127) */
+    return rand() % (126 - 32 + 1) + 32;  /* Generates random ASCII characters between 32 (' ') and 126 ('~') */
 }
 
 int main() {
