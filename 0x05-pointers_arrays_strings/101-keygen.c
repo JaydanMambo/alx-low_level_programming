@@ -1,37 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-/**
- * main - Entry point of the program
- *
- * This program generates and prints a sequence of random printable ASCII
- * characters until their combined ASCII values sum up to a specific target value.
- *
- * Return: 0 (Success)
- */
-int main(void)
-{
-	int target_sum = 2772;
-	int current_sum = 0;
+#define TARGET_CHECKSUM 2772
 
-	/* Seed the random number generator with the current time */
-	srand(time(NULL));
+// Function to generate a random ASCII character within a specified range
+char getRandomAsciiChar() {
+    return rand() % (126 - 32 + 1) + 32;  // Generates random ASCII characters between 32 (' ') and 126 ('~')
+}
 
-	while (current_sum < target_sum)
-	{
-		char random_char = rand() % 94 + 33; /* Generate a random printable ASCII character */
-		int ascii_value = (int)random_char;
+int main() {
+    srand(time(NULL));  // Seed the random number generator with the current time
 
-		if (current_sum + ascii_value <= target_sum)
-		{
-			printf("%c", random_char);
-			current_sum += ascii_value;
-		}
-	}
+    int currentChecksum = 0;
+    char password[50];  // Adjust the array size as needed
 
-	printf("\n");
+    while (currentChecksum != TARGET_CHECKSUM) {
+        // Generate a random character and add its ASCII value to the checksum
+        char character = getRandomAsciiChar();
+        currentChecksum += character;
 
-	return (0);
+        // Check if the checksum exceeds the target
+        if (currentChecksum > TARGET_CHECKSUM) {
+            // Reset the checksum and regenerate the password
+            currentChecksum = 0;
+            password[0] = '\0';  // Reset the password
+            continue;
+        }
+
+        // Append the character to the password
+        size_t passwordLength = strlen(password);
+        if (passwordLength < sizeof(password) - 1) {
+            password[passwordLength] = character;
+            password[passwordLength + 1] = '\0';  // Null-terminate the password
+        }
+    }
+
+    printf("%s\n", password);
+
+    return 0;
 }
 
