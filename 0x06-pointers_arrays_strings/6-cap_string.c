@@ -1,48 +1,38 @@
 #include "main.h"
 
 /**
- * cap_string - Capitalizes the first letter of each word in a string.
- * @str: The input string to capitalize
- * Return: A pointer to the modified string;
+ * cap_string - capitalizes all words of a string
+ * @str: string to capitalize
+ * Return: str;
  */
 char *cap_string(char *str)
 {
-	int capitalize_next = 1;
-	/* Next character should be capitalized */
-	int i;
-	char separators[] = ",;.!?(){}\n\t\" ";
+	int x, y;
+	int flag;
+	char sig[] = ",;.!?(){}\n\t\" ";
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (x = 0, flag = 0; str[x] != '\0'; x++)
 	{
-		char current_char = str[i];
-
-		/* Check if the current character is a lowercase */
-		if (capitalize_next && (current_char >= 'a' && current_char <= 'z'))
+		if (str[0] > 96 && str[0] < 123)
+			flag = 1;
+		for (y = 0; sig[y] != '\0'; y++)
 		{
-			str[i] -= ('a' - 'A');
-			capitalize_next = 0; /* Reset the flag */
+			if (sig[y] == str[x])
+				flag = 1;
 		}
-		else
-		{
-			/* Check if the current character is one of the separators */
-			int j;
 
-			for (j = 0; separators[j] != '\0'; j++)
+		if (flag)
+		{
+			if (str[x] > 96 && str[x] < 123)
 			{
-				if (current_char == separators[j])
-				{
-					capitalize_next = 1; /* Set the flag for the next word */
-					break;
-				}
+				str[x] -= 32;
+				flag = 0;
 			}
-		}
-		if (!(current_char >= 'a' && current_char <= 'z') &&
-				!(current_char >= 'A' && current_char <= 'Z') &&
-				!(current_char >= '0' && current_char <= '9'))
-		{
-			capitalize_next = 1;
+			else if (str[x] > 64 && str[x] < 91)
+				flag = 0;
+			else if (str[x] > 47 && str[x] < 58)
+				flag = 0;
 		}
 	}
 	return (str);
 }
-
