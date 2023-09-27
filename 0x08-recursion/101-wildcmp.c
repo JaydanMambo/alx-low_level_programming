@@ -2,10 +2,10 @@
 #include <stdio.h>
 
 /**
- * wildcmp -  Compares 2 strings
- * @s1: type char str
- * @s2: type char str wildcmp.
- * Return: 1 if str identical if not 0.
+ * wildcmp -  A Function that compares 2 strings
+ * @s1: First input string
+ * @s2: Second input string
+ * Return: 1 if str identical, otherwise 0.
  */
 int wildcmp(char *s1, char *s2)
 {
