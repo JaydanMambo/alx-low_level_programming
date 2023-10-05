@@ -1,88 +1,50 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
-/**
- * _puts - prints a string, followed by a new line,
- * @str: pointer to the string to print
- * Return: void
-*/
-
-
-void _puts(char *str)
-{
-int i = 0;
-while (str[i])
-{
-	_putchar(str[i]);
-	i++;
-}
-
-}
+#include <ctype.h>
 
 /**
- * _atoi - convert a string to an integer.
- * @s: char type string
- * Return: integer converted
+ * isNumeric - Check if a string contains only digits.
+ * @str: The input string to check.
+ *
+ * Return: 1 if the string contains only digits, 0 otherwise.
  */
-
-int _atoi(const char *s)
+int isNumeric(const char *str)
 {
-	int sign = 1;
-	unsigned long int resp = 0, firstNum, i;
-
-	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
+	while (*str)
 	{
-		if (s[firstNum] == '-')
-		{
-			sign *= -1;
-		}
+		if (!isdigit(*str))
+			return (0);
+		str++;
 	}
+	return (1);
+}
 
-	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
+/**
+ * main - Entry point of the program.
+ * @argc: The number of command-line arguments.
+ * @argv: An array of strings containing the command-line arguments.
+ *
+ * Return: 0 on success, 98 if the number of arguments is incorrect or
+ *         if num1 or num2 are not composed of digits.
+ */
+int main(int argc, char *argv[])
+{
+	int n1, n2, mul;
+
+	if (argc != 3)
 	{
-		resp *= 10;
-		resp += (s[i] - 48);
+		printf("Error\n");
+		return (98);
 	}
-
-	return (sign * resp);
-}
-
-/**
- * print_int - prints an integer.
- * @n: int
- * Return: 0
- */
-void print_int(unsigned long int n)
-{
-
-unsigned  long int divisor = 1, i, resp;
-
-for (i = 0; n / divisor > 9; i++, divisor *= 10)
-;
-
-for (; divisor >= 1; n %= divisor, divisor /= 10)
-{
-	resp = n / divisor;
-	_putchar('0' + resp);
-}
-}
-/**
- * main - print the result of the multiplication, followed by a new line
- * @argc: int
- * @argv: list
- * Return: 0
- */
-
-int main(int argc, char const *argv[])
-{
-(void)argc;
-
-if (argc != 3)
-{
-	_puts("Error ");
-	exit(98);
-}
-print_int(_atoi(argv[1]) * _atoi(argv[2]));
-_putchar('\n');
-
-return (0);
+	if (!isNumeric(argv[1]) || !isNumeric(argv[2]))
+	{
+		printf("Error\n");
+		return (98);
+	}
+	n1 = atoi(argv[1]);
+	n2 = atoi(argv[2]);
+	mul = n1 * n2;
+	printf("%d\n", mul);
+	return (0);
 }
