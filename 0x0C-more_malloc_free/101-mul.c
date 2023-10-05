@@ -1,62 +1,88 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-
 /**
- * isNumeric - Check if a string contains only digits.
- * @str: The input string to check.
- *
- * Return: 1 if the string contains only digits, 0 otherwise.
- */
-int isNumeric(const char *str)
+ * _puts - prints a string, followed by a new line,
+ * @str: pointer to the string to print
+ * Return: void
+*/
+
+
+void _puts(char *str)
 {
-	while (*str)
-	{
-		if (!isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
+int i = 0;
+while (str[i])
+{
+	_putchar(str[i]);
+	i++;
+}
+
 }
 
 /**
- * main - Entry point of the program.
- * @argc: The number of command-line arguments.
- * @argv: An array of strings containing the command-line arguments.
- *
- * Return: 0 on success, 98 if the number of arguments is incorrect or
- *         if num1 or num2 are not composed of digits.
+ * _atoi - convert a string to an integer.
+ * @s: char type string
+ * Return: integer converted
  */
-int main(int argc, char *argv[])
-{
-	int n1, n2, mul;
-	char error[] = "Error\n";
-	char result_str[20];
-	char *p;
 
-	if (argc != 3)
+int _atoi(const char *s)
+{
+	int sign = 1;
+	unsigned long int resp = 0, firstNum, i;
+
+	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
 	{
-		p = error;
-		while (*p)
+		if (s[firstNum] == '-')
 		{
-			_putchar(*p++);
+			sign *= -1;
 		}
-		return (98);
 	}
-	if (!isNumeric(argv[1]) || !isNumeric(argv[2]))
+
+	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
 	{
-		p = error;
-		while (*p)
-		{
-			_putchar(*p++);
-		}
-		return (98);
+		resp *= 10;
+		resp += (s[i] - 48);
 	}
-	n1 = atoi(argv[1]);
-	n2 = atoi(argv[2]);
-	mul = n1 * n2;
-	p = result_str;
-	printf("%d\n", mul);
-	return (0);
+
+	return (sign * resp);
+}
+
+/**
+ * print_int - prints an integer.
+ * @n: int
+ * Return: 0
+ */
+void print_int(unsigned long int n)
+{
+
+unsigned  long int divisor = 1, i, resp;
+
+for (i = 0; n / divisor > 9; i++, divisor *= 10)
+;
+
+for (; divisor >= 1; n %= divisor, divisor /= 10)
+{
+	resp = n / divisor;
+	_putchar('0' + resp);
+}
+}
+/**
+ * main - print the result of the multiplication, followed by a new line
+ * @argc: int
+ * @argv: list
+ * Return: 0
+ */
+
+int main(int argc, char const *argv[])
+{
+(void)argc;
+
+if (argc != 3)
+{
+	_puts("Error ");
+	exit(98);
+}
+print_int(_atoi(argv[1]) * _atoi(argv[2]));
+_putchar('\n');
+
+return (0);
 }
