@@ -3,6 +3,21 @@
 #include <stdlib.h>
 
 /**
+ * _memeset - Set each byte of a memory block to a specific value.
+ * @ptr: Pointer to the memory block.
+ * @value: The value to set (interpreted as an unsigned char).
+ * @size: Number of bytes to set.
+ */
+void _memeset(void *ptr, int value, size_t size)
+{
+	unsigned char *byte_ptr = (unsigned char *)ptr;
+	size_t i;
+
+	for (i = 0; i < size; i++)
+		byte_ptr[i] = (unsigned char)value;
+}
+
+/**
  * _calloc - Allocate memory for an array of elements
  *             and initialize to zero.
  *
@@ -22,9 +37,8 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	/* Allocate memory for the array and initialize to zero */
 	ptr = malloc(nmemb * size);
 	if (ptr == NULL)
-		return (NULL);
-	/* Use memset to initialize the memory block to zero */
-	memset(ptr, 0, nmemb * size);
+		exit(98);
+	/* Initialize the memory block to zero */
+	_memeset(ptr, 0, nmemb * size);
 	return (ptr);
 }
-
