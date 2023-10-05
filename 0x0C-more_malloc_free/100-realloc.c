@@ -11,32 +11,31 @@
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	void *new_ptr;
-	unsigned int copy_size;
-	char *char_ptr_new;
-	char *char_ptr_old;
+	void *p;
 	unsigned int i;
 
 	if (new_size == old_size)
 		return (ptr);
-	if (new_size == 0)
+	if (new_size == 0 && ptr != NULL)
 	{
 		free(ptr);
 		return (NULL);
 	}
 	if (ptr == NULL)
-		return (malloc(new_size));
-	new_ptr = malloc(new_size);
-	if (new_ptr == NULL)
-		return (NULL);
-	/* Determine the size to copy (minimum of old and new sizes) */
-	copy_size = (old_size < new_size) ? old_size : new_size;
-	/* Cast pointers to characters for byte-wise copying */
-	char_ptr_new = (char *)new_ptr;
-	char_ptr_old = (char *)ptr;
-	/* Copy data from the old block to the new block */
-	for (i = 0; i < copy_size; i++)
-		char_ptr_new[i] = char_ptr_old[i];
-	free(ptr);
-	return (new_ptr);
+	{
+		p = malloc(new_size);
+		if (p == NULL)
+			return (NULL);
+		return (p);
+	}
+	if (new_size > old_size)
+	{
+		p = malloc(new_size);
+		if (p == NULL)
+			return (NULL);
+		for (i = 0; i < old_size && i < new_size; i++)
+			*((char *)p + i) = *((char *)ptr + i);
+		free(ptr);
+	}
+	return (p);
 }
