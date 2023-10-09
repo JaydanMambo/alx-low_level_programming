@@ -1,76 +1,49 @@
 #include "dog.h"
 #include <stdio.h>
 #include <stdlib.h>
+
 /**
- * new_dog - create new data structure for dog
- * @name: name of dog
- * @age: age of dog
- * @owner: dog owner
- *
- * Return: Pointer to new dog
- **/
+ * new_dog - Function that creates a new dog.
+ * @name: type pointer char name.
+ * @age: type pointer float age
+ * @owner: type pointer char owner
+ * Return: 0.
+ */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_dog;
-	int len_name, len_owner;
+	struct dog *django;
+	char *i, *j;
+	int x, y, z;
 
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL)
+	django = malloc(sizeof(struct dog));
+	if (django == NULL)
 		return (NULL);
 
-	len_name = _strlen(name);
-	new_dog->name = malloc(sizeof(char) * len_name + 1);
-	if (new_dog->name == NULL)
+	for (x = 0; *(name + x) != '\0'; x++)
+		;
+	for (y = 0; *(owner + y) != '\0'; y++)
+		;
+	i = malloc(sizeof(char) * x + 1);
+	if (i == NULL)
 	{
-		free(new_dog);
+		free(django);
 		return (NULL);
 	}
-	new_dog->name = _strcpy(new_dog->name, name);
-	len_owner = _strlen(owner);
-	new_dog->owner = malloc(sizeof(char) * len_owner + 1);
-	if (new_dog->owner == NULL)
+	j = malloc(sizeof(char) * y + 1);
+	if (j == NULL)
 	{
-		free(new_dog->name);
-		free(new_dog);
+		free(i);
+		free(django);
 		return (NULL);
 	}
+	for (z = 0; z <= x; z++)
+		*(i + z) = *(name + z);
+	for (z = 0; z <= y; z++)
+		*(j + z) = *(owner + z);
 
-	new_dog->owner = _strcpy(new_dog->owner, owner);
-	new_dog->age = age;
+	django->name = i;
+	django->age = age;
+	django->owner = j;
 
-	return (new_dog);
-}
-
-/**
- * _strlen - determinates the lenght of a string
- * @s: pointer to string
- * Return: the length
- */
-int _strlen(char *s)
-{
-	int a;
-
-	for (a = 0; s[a] != '\0'; a++)
-	;
-	return (a);
-}
-
-/**
- * _strcpy - copies a pointed string
- * @dest: pointer to the destine string
- * @src: pointer to the source string
- * Return: the adress of the destiny string
- */
-char *_strcpy(char *dest, char *src)
-{
-	int a = 0;
-
-	while (src[a] != '\0')
-	{
-		dest[a] = src[a];
-		a++;
-	}
-
-	dest[a] = '\0';
-	return (dest);
+	return (django);
 }
