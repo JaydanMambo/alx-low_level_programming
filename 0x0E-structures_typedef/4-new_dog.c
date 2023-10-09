@@ -1,47 +1,76 @@
 #include "dog.h"
+#include <stdio.h>
 #include <stdlib.h>
-
 /**
- * new_dog - creates a new dog structure
- * @name: Dog's name
- * @age: Dog's age
- * @owner: Dog's owner
- * Return: returns a pointer to newly created dog structure
- */
+ * new_dog - create new data structure for dog
+ * @name: name of dog
+ * @age: age of dog
+ * @owner: dog owner
+ *
+ * Return: Pointer to new dog
+ **/
 dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *new_dog;
-	char *cpyname, *cpyowner;
-	int len_name = 0, len_owner = 0, i;
-
-	if (name == NULL || owner == NULL)
-		return (NULL);
-
-	while (name[len_name])
-		len_name++;
-	while (owner[len_owner])
-		len_owner++;
+	int len_name, len_owner;
 
 	new_dog = malloc(sizeof(dog_t));
 	if (new_dog == NULL)
 		return (NULL);
 
-	cpyname = malloc(len_name + 1);
-	if (cpyname == NULL)
+	len_name = _strlen(name);
+	new_dog->name = malloc(sizeof(char) * len_name + 1);
+	if (new_dog->name == NULL)
+	{
+		free(new_dog);
 		return (NULL);
-	for (i = 0; name[i]; i++)
-		cpyname[i] = name[i];
-	cpyname[i] = '\0';
-
-	cpyowner = malloc(len_owner + 1);
-	if (cpyowner == NULL)
+	}
+	new_dog->name = _strcpy(new_dog->name, name);
+	len_owner = _strlen(owner);
+	new_dog->owner = malloc(sizeof(char) * len_owner + 1);
+	if (new_dog->owner == NULL)
+	{
+		free(new_dog->name);
+		free(new_dog);
 		return (NULL);
-	for (i = 0; owner[i]; i++)
-		cpyowner[i] = owner[i];
-	cpyowner[i] = '\0';
+	}
 
-	new_dog->name = cpyname;
+	new_dog->owner = _strcpy(new_dog->owner, owner);
 	new_dog->age = age;
-	new_dog->owner = cpyowner;
+
 	return (new_dog);
+}
+
+/**
+ * _strlen - determinates the lenght of a string
+ * @s: pointer to string
+ * Return: the length
+ */
+int _strlen(char *s)
+{
+	int a;
+
+	for (a = 0; s[a] != '\0'; a++)
+	;
+	return (a);
+}
+
+/**
+ * _strcpy - copies a pointed string
+ * @dest: pointer to the destine string
+ * @src: pointer to the source string
+ * Return: the adress of the destiny string
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int a = 0;
+
+	while (src[a] != '\0')
+	{
+		dest[a] = src[a];
+		a++;
+	}
+
+	dest[a] = '\0';
+	return (dest);
 }
