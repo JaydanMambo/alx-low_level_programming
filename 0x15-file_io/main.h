@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+#include <fcntl.h> 
 #include <stddef.h>
 
 /* Task 0: read_textfile */
