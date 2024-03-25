@@ -52,3 +52,11 @@
   print("{} x {} = {}".format(a, b, cops.mul(a, b)))
   print("{} / {} = {}".format(a, b, cops.div(a, b)))
   print("{} % {} = {}".format(a, b, cops.mod(a, b)))
+
+### Task 3: Code Injection for Winning Giga Millions
+- **Description:**  Code injection to win the Giga Millions
+- **File:**
+101-make_me_win.sh: Shell script to run on the server.
+- **Instructions:**
+The script should be run by the mole on the server 98 seconds before gm runs.
+The script will delete itself after execution.
